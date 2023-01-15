@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signOut, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBTrJ8mBY4dl_aeev2cbSY_6BzY2TmvjU4",
@@ -20,7 +20,6 @@ document.getElementById('Dashboard').style.display = "none";
 document.getElementById('login').addEventListener("click", GoogleLogin);
 document.getElementById('logout').addEventListener("click", LogoutUser);
 document.getElementById('Glogin').addEventListener("click", GithubLogin);
-
 
 var provider = new GoogleAuthProvider();
 var Gprovider = new GithubAuthProvider();
@@ -52,9 +51,13 @@ function checkAuthState(user) {
 checkAuthState();
 function showUserInfo(user) {
     document.getElementById('userInfo').innerHTML = `
-    <img src = "${user.photoURL}" style="width:15%"></img>
-    <p>Name : ${user.displayName}</p>
-    <p>Name : ${user.email}</p>
+    <center><img src = "${user.photoURL}" style="position: relative; width: 170px; height: 170px; overflow: hidden; border-radius: 50%;"></img>
+    <div><br></div>
+    <h1 style="">${user.displayName}</h1>
+    <div><br></div>
+    <h6>${user.email}</h6>
+    <div><br></div>
+    </center>
     `
 }
 
@@ -63,11 +66,9 @@ function GithubLogin(){
     console.log('Login Btn Call for git')
     signInWithPopup(auth, Gprovider).then(res => {
         console.log(res.user);
-
         let token = res.credential.accessToken;
         let user = res.user;
-
-        GshowUserInfo(res.user)
+        showUserInfo(res.user)
     }).catch(error => {
         console.log(error);
     })
@@ -85,16 +86,6 @@ function GcheckAuthState(user) {
     }));
 }
 GcheckAuthState();
-function GshowUserInfo(user) {
-    document.getElementById('GuserInfo').innerHTML = `
-    <img src = "${user.photoURL}" style="width:15%"></img>
-    <p>Name : ${user.displayName}</p>
-    <p>Name : ${user.email}</p>
-    <p>Name : ${user.emailVerified}</p>
-    <p>Name : ${user.isAnonymous}</p>
-    `
-}
-
 
 //looooooooogout
 function LogoutUser() {
