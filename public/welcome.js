@@ -17,6 +17,7 @@ const auth = getAuth(app);
 
 document.getElementById('logoutwithemail').addEventListener("click", LogoutUser);
 
+
 function LogoutUser() {
     console.log('Logout Btn Call');
     signOut(auth).then(() => {
@@ -31,6 +32,6 @@ onAuthStateChanged(auth, (user => {
         location.replace("indexlogin.html");
     }
     else {
-
+        document.getElementById('welcomemsg').innerHTML = user.email;
     }
 }));

@@ -26,7 +26,6 @@ function login(){
         // Signed in 
         const user = userCredential.user;
         location.replace("welcome.html");
-        document.getElementById('welcomemsg').innerHTML = "Hello, " + user.email
       })
       .catch((error) => {
         const errorCode = error.code;
