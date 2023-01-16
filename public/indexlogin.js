@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider, signOut, onAuthStateChanged,signInWithEmailAndPassword} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBTrJ8mBY4dl_aeev2cbSY_6BzY2TmvjU4",
@@ -16,16 +16,16 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 document.getElementById('loginwithemail').addEventListener("click", login);
-document.getElementById('logoutwithemail').addEventListener("click", LogoutUser);
 
 //email and passsssword
 function login(){
     console.log('btn pressed');
-    let email = document.getElementById('name').value;
+    let email = document.getElementById('email').value;
     let pass = document.getElementById('pass').value;
     signInWithEmailAndPassword(auth, email, pass).then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
+        location.replace("welcome.html");
         document.getElementById('welcomemsg').innerHTML = "Hello, " + user.email
       })
       .catch((error) => {
@@ -42,13 +42,3 @@ onAuthStateChanged(auth, (user => {
 
     }
 }));
-
-//looooooooogout
-function LogoutUser() {
-    console.log('Logout Btn Call');
-    signOut(auth, provider).then(() => {
-        
-    }).catch(e => {
-        console.log(e);
-    })
-}
