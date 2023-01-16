@@ -29,7 +29,7 @@ function LogoutUser() {
 
 onAuthStateChanged(auth, (user => {
     if (!user) {
-        location.replace("indexlogin.html");
+        location.replace("index.html");
     }
     else {
         document.getElementById('welcomemsg').innerHTML = user.email;
