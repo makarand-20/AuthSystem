@@ -1,5 +1,5 @@
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getAuth} from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+import { getAuth, createUserWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBTrJ8mBY4dl_aeev2cbSY_6BzY2TmvjU4",
@@ -14,5 +14,23 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+
+document.getElementById('signupwithemail').addEventListener("click", signupwithemail);
+
+function signupwithemail() {
+    let signupemail = document.getElementById('signupemail').value;
+    let signuppass = document.getElementById('signuppass').value;
+    createUserWithEmailAndPassword(auth, signupemail, signuppass)
+        .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            location.replace("welcome.html");
+            alert('Login Successfull');
+            // ...
+        })
+        .catch((error) => {
+            document.getElementById('errorr').innerHTML = error.message;
+        });
+}
 
 
