@@ -62,7 +62,7 @@ function checkAuthState(user) {
             document.getElementById('Dashboard').style.display = "block";
         }
         else {
-
+            
         }
     }));
 }
