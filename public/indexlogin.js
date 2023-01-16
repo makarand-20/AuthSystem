@@ -28,9 +28,7 @@ function login(){
         location.replace("welcome.html");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        alert('Login Failed!');
+        document.getElementById('errorr').innerHTML = error.message;
       });
 }
 
